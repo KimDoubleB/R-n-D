@@ -1,0 +1,24 @@
+name: Daily Issue Creation
+
+on:
+  schedule:
+    - cron: '0 16 * * *'
+
+jobs:
+  create-issue:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Create new issue
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        TODAY=$(date -d "+9 hours" +'%Y-%m-%d')
+        gh issue create \
+          --title "[$TODAY] R & D" \
+          --body "오늘 읽을 아티클을 코멘트로 추가해주세요 🚀"
