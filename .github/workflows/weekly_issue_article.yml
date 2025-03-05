@@ -19,8 +19,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        TODAY=$(date -d "+9 hours" +'%Y-%m-%d')
+        START_DATE=$(date -d "+9 hours" +'%Y-%m-%d')
         END_DATE=$(date -d "+6 days +9 hours" +'%Y-%m-%d')
         gh issue create \
-          --title "[$START_DATE - $END_DATE] Article" \
+          --title "[$START_DATE - $END_DATE] Article 📰" \
           --body "이번 주에 읽을 아티클을 코멘트로 추가해주세요 🚀"
