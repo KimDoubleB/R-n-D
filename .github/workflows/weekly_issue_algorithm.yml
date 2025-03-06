@@ -1,0 +1,26 @@
+name: Weekly Issue Creation - Algorithm
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * 3'
+
+jobs:
+  create-issue:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Create new issue
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        START_DATE=$(date -d "+9 hours" +'%Y-%m-%d')
+        END_DATE=$(date -d "+6 days +9 hours" +'%Y-%m-%d')
+        gh issue create \
+          --title "[$START_DATE - $END_DATE] Algorithm 👨‍💻" \
+          --body "한 주간 풀었거나 풀 예정인 알고리즘(Leetcode)을 추가해주세요 🚀"
